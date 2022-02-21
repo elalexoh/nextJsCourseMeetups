@@ -31,8 +31,9 @@ export async function getStaticPaths() {
 	client.close();
 
 	return {
-		fallback: false, // paths key have all posibles paths
-		// fallback: false, // try to generate page for new paths
+		fallback: "blocking", // if a new path wait until data loaded (dont show empty page)
+		// fallback: true, // if a new path show empty page until data loaded
+		// fallback: false, // if not in list return 404
 
 		paths: meetups.map((meetup) => ({
 			params: { meetupId: meetup._id.toString() },
